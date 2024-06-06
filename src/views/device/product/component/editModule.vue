@@ -22,7 +22,7 @@
                   :on-success="handleUplaodSuccess"
                   :before-upload="beforeUplaodUpload"
               >
-                <img v-if="state.ruleForm.photoUrl" :src="baseURL + '/upload/get/'+ state.ruleForm.photoUrl" class="uploader-image" fit="contain"/>
+                <img v-if="state.ruleForm.photoUrl" :src="baseURL + '/upload/get/'+ state.ruleForm.photoUrl+'?fileType=DevicePath'" class="uploader-image" fit="contain"/>
                 <el-icon v-else class="uploader-icon"><Plus /></el-icon>
               </el-upload>
             </el-form-item>
@@ -165,7 +165,7 @@ const state = reactive({
 // 打开弹窗
 const openDialog = (row: any) => {
   state.ruleForm = JSON.parse(JSON.stringify(row));
-  state.upUrl = baseURL + '/upload/up'
+  state.upUrl = baseURL + '/upload/up?fileType=DevicePath'
   state.headers = {'X-TOKEN': `${Session.get('token')}`}
 
   state.isShowDialog = true;

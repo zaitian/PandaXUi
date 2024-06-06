@@ -307,7 +307,7 @@ const onViewProduct = (row: object) => {
 }
 
 const getImage = (row:any) => {
-  return row.photoUrl ? baseURL + '/upload/get/'+ row.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
+  return row.photoUrl ? baseURL + '/upload/get/'+ row.photoUrl+"?fileType=DevicePath" : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
 }
 
 /** 删除按钮操作 */

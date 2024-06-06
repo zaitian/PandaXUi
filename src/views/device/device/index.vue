@@ -36,10 +36,10 @@
               :inline="true"
               label-width="68px"
           >
-            <el-form-item label="设备名称" prop="name">
+            <el-form-item label="设备别名" prop="alias">
               <el-input
-                  v-model="state.queryParams.name"
-                  placeholder="请输入设备名称"
+                  v-model="state.queryParams.alias"
+                  placeholder="请输入设备别名"
                   clearable
                   @keyup.enter.native="handleQuery"
               />
@@ -239,7 +239,7 @@ const state = reactive({
     // 每页大小
     pageSize: 10,
     // 以下为参数
-    name: undefined,
+    alias: undefined,
     status: undefined,
     gid: "",
     pid: ""
@@ -258,7 +258,7 @@ const handleQuery = () => {
 /** 重置按钮操作 */
 const resetQuery = () => {
   state.queryParams.gid = "";
-  state.queryParams.name = undefined;
+  state.queryParams.alias = undefined;
   state.queryParams.status = undefined;
 
   handleQuery();
@@ -327,7 +327,7 @@ const getTreeselect = async () => {
 };
 
 const getImage = (row:any) => {
-  return row.product.photoUrl ? baseURL + '/upload/get/'+ row.product.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
+  return row.product.photoUrl ? baseURL + '/upload/get/'+ row.product.photoUrl +'?fileType=DevicePath': row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
 }
 
 watch(
