@@ -194,7 +194,6 @@ import View from "./component/view.vue";
 import gatewayImg from '@/assets/gateway.png'
 import gatewayDImg from '@/assets/gateway_d.png'
 import monitorImg from '@/assets/monitor.png'
-import {listChainLabel} from "@/api/rule/rulechain";
 
 const { proxy } = getCurrentInstance() as any;
 const editModuleRef = ref();
@@ -266,11 +265,11 @@ const getTreeselect = async () => {
 };
 
 const getRuleChain = () => {
-  listChainLabel({}).then((response:any) => {
-    if (response.code === 200){
-      state.ruleOptions = response.data;
-    }
-  });
+  // listChainLabel({}).then((response:any) => {
+  //   if (response.code === 200){
+  //     state.ruleOptions = response.data;
+  //   }
+  // });
 };
 
 const getRuleName = (id) => {
@@ -321,9 +320,13 @@ const onTabelRowDel = (row: any) => {
     cancelButtonText: "取消",
     type: "warning",
   }).then(function () {
-    return delProduct(ids).then(() => {
-      handleQuery();
-      ElMessage.success("删除成功");
+    return delProduct(ids).then((res:any) => {
+      if (res.code === 200){
+        handleQuery();
+        ElMessage.success("删除成功");
+      }else {
+        ElMessage.error("删除失败");
+      }
     });
   });
 };
