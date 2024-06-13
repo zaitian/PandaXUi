@@ -113,7 +113,7 @@
         </template>
         <template v-if="state.ruleForm.type === 'string'">
           <el-form-item label="数据长度">
-            <el-input v-model="state.define.maxLength" type="number" placeholder="数据长度">
+            <el-input v-model.number="state.define.maxLength" type="number" placeholder="数据长度">
               <template #prepend>字节</template>
             </el-input>
           </el-form-item>
