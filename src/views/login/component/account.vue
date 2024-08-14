@@ -164,30 +164,28 @@ const login = () => {
   });
 };
 // 登录
-const onSignIn = async () => {
+const onSignIn = () => {
   state.loading.signIn = true;
-  let loginRespon;
-  try {
-    loginRespon = await signIn(state.loginForm);
-    state.loading.signIn = false
-  } catch (e) {
-    dragRef.value.reset();
-    state.isPassingFour = false;
-    state.loading.signIn = false;
-    state.loginForm.captcha = "";
-    state.loading.signIn = false
-    getCaptcha();
-    return;
-  }
-  let loginRes = loginRespon.data;
-  Session.set("token", loginRes.token);
-  Cookies.set('userName', state.loginForm.username);
 
-  // 模拟后端控制路由，isRequestRoutes 为 true，则开启后端控制路由
-  // 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-  await initBackEndControlRoutes();
-  // 执行完 initBackEndControlRoutes，再执行 signInSuccess
-  signInSuccess();
+  signIn(state.loginForm).then(async (res:any)=>{
+    if (res.code == 200) {
+      state.loading.signIn = false
+      let loginRes = res.data;
+      Session.set("token", loginRes.token);
+      Cookies.set('userName', state.loginForm.username);
+      await initBackEndControlRoutes();
+      // 执行完 initBackEndControlRoutes，再执行 signInSuccess
+      signInSuccess();
+    }else {
+      dragRef.value.reset();
+      state.isPassingFour = false;
+      state.loading.signIn = false;
+      state.loginForm.captcha = "";
+      state.loading.signIn = false
+      getCaptcha();
+      return;
+    }
+  })
 };
 const openVerify = () => {
   state.dialogVerifyVisible = true;
