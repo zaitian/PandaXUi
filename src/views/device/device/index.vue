@@ -41,7 +41,7 @@
                   v-model="state.queryParams.alias"
                   placeholder="请输入设备别名"
                   clearable
-                  @keyup.enter.native="handleQuery"
+                  @keyup.enter="handleQuery"
               />
             </el-form-item>
             <el-form-item label="状态" prop="status">
@@ -91,14 +91,14 @@
             </div>
           </template>
           <div class="content_box">
-            <div v-for="data in state.tableData" class="content_table_item">
+            <div v-for="(data,index) in state.tableData" :key="index" class="content_table_item">
               <el-card :body-style="{ padding: '0px' }" class="ft-card">
-                <div class="ft-head">
+                <div class="ft-head" :style="getCardStyle(data)">
                   <div class="ft-tag">
+                    <el-tag class="ml-3" :type="data.status == '0'?'primary':'danger'">{{data.status == '0' ? "正常": "禁用"}}</el-tag>
                     <el-tag class="ml-3" :type="data.linkStatus ==='inactive'? 'warning': data.linkStatus ==='online' ? 'primary': 'danger'">
                       {{data.linkStatus ==='inactive'? "未激活": data.linkStatus ==='online' ? '在线': "离线"}}
                     </el-tag>
-                    <el-tag class="ml-3" type="warning">{{data.otaVersion ? data.otaVersion: "未识别版本"}}</el-tag>
                   </div>
                   <div class="ft-body">
                     <div class="ft-body-image" >
@@ -291,6 +291,12 @@ const onAllotDevice = (row: object) => {
 // 打开视图
 const onViewDevice = (row: object) => {
   viewRef.value.openDrawer(row);
+}
+
+
+const getCardStyle = (data: object) => {
+  return {'border-bottom': '1px solid var(' +  (data.status ==='1'? '--color-danger' : data.linkStatus ==='inactive' ? '--color-warning' : data.linkStatus ==='online' ? '--color-primary' : '--color-danger')+ ')',
+    background: 'linear-gradient(141.6deg,var('+ (data.status ==='1'? '--color-danger-light-8' : data.linkStatus ==='inactive' ? '--color-warning-light-8' : data.linkStatus ==='online' ? '--color-primary-light-8' : '--color-danger-light-8') +') 0%,rgba(255,255,255,0) 70%)'}
 }
 
 // 获取所有在线的产品

@@ -1,7 +1,7 @@
 <template>
   <div class="system-product-container">
     <el-dialog v-model="state.isShowDialog" width="769px" center draggable>
-      <template #title>
+      <template #header>
         <div style="font-size: large" >{{title}}</div>
       </template>
       <el-form
@@ -73,7 +73,7 @@
           <el-col :span="12">
             <el-form-item label="规则链" prop="ruleChainId">
               <el-select v-model="state.ruleForm.ruleChainId" placeholder="请选择">
-                <el-option v-for="rule in state.ruleOptions" :label="rule.ruleName" :value="rule.id">
+                <el-option v-for="(rule,index) in state.ruleOptions" :key="index" :label="rule.ruleName" :value="rule.id">
                   <span style="float: left">{{ rule.ruleName }}</span>
                   <span style=" float: right;color: var(--el-text-color-secondary);font-size: 13px;">{{ rule.root === '1'? "根链": '普通链' }}</span>
                 </el-option>

@@ -39,7 +39,7 @@
             message: '父网关必选，如果没有请先创建',
             trigger: 'blur',
           },]">
-            <el-option v-for="device in state.devicesOptions" :label="device.name" :value="device.id"/>
+            <el-option v-for="(device,index) in state.devicesOptions" :key="index" :label="device.name" :value="device.id"/>
           </el-select>
         </el-form-item>
         <el-form-item label="状态" prop="status">

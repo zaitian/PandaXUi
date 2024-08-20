@@ -267,14 +267,7 @@ const state = reactive<any>({
     type: "struct",
     description: "",
   },
-  ruleFormParam: {
-    id: "",
-    pid: "",
-    name: "",
-    key: "",
-    type: "string",
-    description: "",
-  },
+  ruleFormParam: {},
   define: {},
   ruleRules: {
     name: [
@@ -390,9 +383,9 @@ const onSubmitParam = () => {
     }
   }else {
     if (state.currentDefine.type === "input"){
-      state.define.input[state.currentDefine.index](state.ruleFormParam)
+      state.define.input[state.currentDefine.index]=state.ruleFormParam
     }else {
-      state.define.output[state.currentDefine.index](state.ruleFormParam)
+      state.define.output[state.currentDefine.index] = state.ruleFormParam
     }
   }
   state.isShowDialog = false
@@ -487,7 +480,7 @@ const elementDefineEdit = (type: string,index:number) => {
   state.isShowDialog = true
   state.currentDefine.type = type
   state.currentDefine.index = index
-  state.currentDefine.opr = "add"
+  state.currentDefine.opr = "edit"
   if (type === 'input'){
     state.ruleFormParam = state.define.input[index]
   }else {

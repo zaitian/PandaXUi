@@ -13,6 +13,9 @@
       <el-tab-pane  label="命令服务" name="commands">
         <Commands v-if="activeName === 'commands'" :rowData="rowData"/>
       </el-tab-pane>
+      <el-tab-pane  label="事件服务" name="events">
+        <Events v-if="activeName === 'events'" :rowData="rowData"/>
+      </el-tab-pane>
     </el-tabs>
 
     <el-dialog v-model="state.isShowDialog" width="750px" title="物模型详情" center draggable >
@@ -35,6 +38,7 @@ import {reactive, ref} from "vue";
 import Attributes from "./model/attributes.vue"
 import Telemetry from "./model/telemetry.vue"
 import Commands from "./model/commands.vue"
+import Events from "./model/events.vue"
 
 import Codemirror from "codemirror-editor-vue3";
 import "codemirror/mode/javascript/javascript.js";

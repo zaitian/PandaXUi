@@ -41,7 +41,7 @@
                   v-model="state.queryParams.name"
                   placeholder="请输入产品名称"
                   clearable
-                  @keyup.enter.native="handleQuery"
+                  @keyup.enter="handleQuery"
               />
             </el-form-item>
             <el-form-item label="状态" prop="status">
@@ -59,7 +59,7 @@
                   v-model="state.queryParams.deviceType"
                   placeholder="请输入设备类型"
                   clearable
-                  @keyup.enter.native="handleQuery"
+                  @keyup.enter="handleQuery"
               />
             </el-form-item>
             <el-form-item>
@@ -94,9 +94,9 @@
             </div>
           </template>
           <div class="content_box">
-            <div v-for="data in state.tableData" class="content_table_item">
+            <div v-for="(data,index) in state.tableData" :key="index" class="content_table_item">
               <el-card :body-style="{ padding: '0px' }" class="ft-card">
-                <div class="ft-head">
+                <div class="ft-head" :style="getCardStyle(data)">
                   <div class="ft-tag">
                     <el-tag class="ml-3" type="primary">{{data.status == '0' ? "正常": "禁用"}}</el-tag>
                     <el-tag class="ml-3" type="success">{{data.protocolName}}</el-tag>
@@ -126,8 +126,8 @@
                          inline-prompt
                          active-value="0"
                          inactive-value="1"
-                         active-text="已发布"
-                         inactive-text="未发布"
+                         active-text="正常"
+                         inactive-text="禁用"
                          @click="handleStatusChange(data)"
                      />
                       <el-popover  >
@@ -188,6 +188,7 @@ import {
 import { ElMessageBox, ElMessage } from "element-plus";
 import {listProduct, delProduct, updateProduct} from "@/api/device/product";
 import {listProductCategoryLabel} from "@/api/device/product_category";
+import {listChainLabel} from "@/api/rule/rulechain";
 import EditModule from "./component/editModule.vue";
 import View from "./component/view.vue";
 
@@ -265,12 +266,18 @@ const getTreeselect = async () => {
 };
 
 const getRuleChain = () => {
-  // listChainLabel({}).then((response:any) => {
-  //   if (response.code === 200){
-  //     state.ruleOptions = response.data;
-  //   }
-  // });
+  listChainLabel({}).then((response:any) => {
+    if (response.code === 200){
+      state.ruleOptions = response.data;
+    }
+  });
 };
+
+const getCardStyle = (data: object) => {
+  return {'border-bottom': '1px solid var(' +  (data.status ==='0' ? '--color-primary' : '--color-danger')+ ')',
+    background: 'linear-gradient(141.6deg,var('+ (data.status ==='0' ? '--color-primary-light-8' : '--color-danger-light-8') +') 0%,rgba(255,255,255,0) 70%)'}
+}
+
 
 const getRuleName = (id) => {
   const find = state.ruleOptions.find(obj => obj.id === id);
@@ -353,11 +360,11 @@ const handleStatusChange = (row: any) => {
   let text = row.status == "0" ? "发布" : "禁用" ;
   ElMessageBox({
     title: "警告",
-    message: '确认要' + text + '"' + row.name + '"吗?',
+    message: '确认要' + text + '"' + row.name + '"吗? 会影响产品下面的所有设备！',
     showCancelButton: true,
     confirmButtonText: "确定",
     cancelButtonText: "取消",
-    beforeClose: (action: string, instance: any, done: any) => {
+    beforeClose: (action, instance, done) => {
       if (action === "confirm") {
         return updateProduct({id: row.id,status: row.status}).then(() => {
           ElMessage.success(text + "成功");
