@@ -18,6 +18,9 @@
       <el-tab-pane label="告警详情" name="alarm">
         <DeviceAlarm v-if="state.activeName === 'alarm'" :rowData="state.rowData"/>
       </el-tab-pane>
+      <el-tab-pane label="事件中心" name="event">
+        <DeviceEvent v-if="state.activeName === 'event'" :rowData="state.rowData"/>
+      </el-tab-pane>
       <el-tab-pane label="命令下发" name="commands">
         <DeviceCmd v-if="state.activeName === 'commands'" :rowData="state.rowData"></DeviceCmd>
       </el-tab-pane>
@@ -36,6 +39,7 @@ import DeviceExt from "./device_ext.vue"
 import DeviceProperty from "./device_property.vue"
 import DeviceSub from "./device_sub.vue"
 import DeviceAlarm from "./device_alarm.vue"
+import DeviceEvent from "./device_event.vue"
 import DeviceCmd from "./device_cmd.vue"
 import DeviceChannel from "./device_channel.vue"
 

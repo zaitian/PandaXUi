@@ -7,7 +7,8 @@
       <el-tab-pane label="属性" name="attributes">
         <el-scrollbar height="600px">
         <div style="display: flex;flex-wrap: wrap;">
-          <el-card v-if="deviceStatusOptions.length > 0" v-for="status in deviceStatusOptions" style="width: 300px;margin: 10px;">
+          <template v-if="deviceStatusOptions.length > 0">
+          <el-card  v-for="(status,index) in deviceStatusOptions" :key="index" style="width: 300px;margin: 10px;">
             <template #header>
               <div style="display: flex;justify-content: space-between;">
                 <div style="font-size: large">{{status.name}}</div>
@@ -23,6 +24,7 @@
               {{ dateStrFormat(status.time) }}
             </div>
           </el-card>
+          </template>
           <el-empty v-else description="请去产品中设置属性" style="margin-left: 40%;"/>
         </div>
         </el-scrollbar>
@@ -30,7 +32,8 @@
       <el-tab-pane label="遥测" name="telemetry">
         <el-scrollbar height="600px">
         <div style="display: flex;flex-wrap: wrap;">
-          <el-card v-if="deviceStatusOptions.length > 0" v-for="status in deviceStatusOptions" style="width: 300px;margin: 10px;">
+          <template v-if="deviceStatusOptions.length > 0" >
+          <el-card v-for="(status,index) in deviceStatusOptions" :key="index" style="width: 300px;margin: 10px;">
             <template #header>
               <div style="display: flex;justify-content: space-between;">
                 <div style="font-size: large">{{status.name}}</div>
@@ -48,6 +51,7 @@
               {{ (status.time === null || status.value === undefined || status.value === "") ? "": status.time ? dateStrFormat(status.time) : '' }}
             </div>
           </el-card>
+          </template>
           <el-empty v-else description="请去产品中设置遥测" style="margin-left: 40%;"/>
         </div>
         </el-scrollbar>
@@ -263,8 +267,17 @@ const getEchart = () => {
 
 const onDown = () => {
   loading.value = true
-  downAttribute(props.rowData.id ,{key: currentAttribute.value.key, value: currentAttribute.value.value}).then((res:any)=>{
-    if (res.code === 200){
+  let cmdContent = {
+    deviceName: props.rowData.name,
+    [currentAttribute.value.key]: currentAttribute.value.value
+  }
+  addCmd({
+    cmdName: "setAttribute",
+    deviceId: props.rowData.id,
+    mode: 'single',
+    cmdContent: JSON.stringify(cmdContent, null, "")
+  }).then(res => {
+     if (res.code === 200){
       ElMessage.success("属性下发成功")
       isShowDialog.value = false
     }

@@ -13,7 +13,7 @@
               v-model="state.queryParams.type"
               placeholder="请输入设备名称"
               clearable
-              @keyup.enter.native="handleQuery"
+              @keyup.enter="handleQuery"
           />
         </el-form-item>
         <el-form-item label="告警状态" prop="state">

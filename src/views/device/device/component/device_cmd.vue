@@ -257,10 +257,9 @@ const onSelectCmd = (cmd:any) => {
 const onSubmit = () => {
   state.loading = true;
   state.cmdForm.deviceId = props.rowData.id
-  state.cmdForm.cmdContent.deviceNum = props.rowData.name
+  state.cmdForm.cmdContent.deviceName = props.rowData.name
   state.cmdForm.cmdContent = JSON.stringify(state.cmdForm.cmdContent, null, "")
   addCmd(state.cmdForm).then((res:any) => {
-    console.log(res)
     state.loading = false;
     if (res.code == 200){
       ElMessage.success("新增成功");

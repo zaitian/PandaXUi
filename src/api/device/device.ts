@@ -26,7 +26,7 @@ export function listDeviceAll(query:any) {
 }
 
 // 查询Device详细
-export function getDevice(id:number) {
+export function getDevice(id:string) {
     return request({
         url: '/device/' + id,
         method: 'get'
@@ -34,7 +34,7 @@ export function getDevice(id:number) {
 }
 
 // 查询Device详细
-export function getDeviceStatus(id:number,query:any) {
+export function getDeviceStatus(id:string,query:any) {
     return request({
         url: '/device/' + id+'/status',
         method: 'get',
@@ -42,8 +42,17 @@ export function getDeviceStatus(id:number,query:any) {
     })
 }
 
+// 查询Device事件
+export function getDeviceEvent(id:string,query:any) {
+    return request({
+        url: '/device/' + id+'/event',
+        method: 'get',
+        params: query
+    })
+}
+
 // 查询Device属性历史
-export function getDevicePropertyHistory(id:number,query:any) {
+export function getDevicePropertyHistory(id:string,query:any) {
     return request({
         url: '/device/' + id+'/property/history',
         method: 'get',
@@ -52,7 +61,7 @@ export function getDevicePropertyHistory(id:number,query:any) {
 }
 
 // 设备属性下发
-export function downAttribute(id:number,query:any) {
+export function downAttribute(id:string,query:any) {
     return request({
         url: '/device/' + id+'/attribute/down',
         method: 'get',

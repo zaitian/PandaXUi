@@ -105,6 +105,13 @@ const tableData = [
     platform: '发布、订阅',
     device: '订阅、发布',
     describe: "服务端响应调用方法结果，设备端响应命令执行结果",
+  },{
+    group: '设备事件',
+    topic: "v1/devices/event/${identifier}",
+    stream: '上行',
+    platform: '订阅',
+    device: '发布',
+    describe: "设备端上报事件结果",
   }
 ]
 
