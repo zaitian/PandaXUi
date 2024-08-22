@@ -41,10 +41,11 @@ const props = defineProps({
     default: () => {},
   },
 })
-const baseURL = import.meta.env.VITE_API_URL
+
+const downURL = import.meta.env.VITE_API_URL + "/down/image/"
 
 const getImage = (row:any) => {
-  return row.photoUrl ? baseURL + '/upload/get/'+ row.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
+  return row.photoUrl ? downURL + row.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
 }
 
 

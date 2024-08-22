@@ -199,7 +199,7 @@ import monitorImg from '@/assets/monitor.png'
 const { proxy } = getCurrentInstance() as any;
 const editModuleRef = ref();
 const viewRef = ref();
-const baseURL = import.meta.env.VITE_API_URL
+const downURL = import.meta.env.VITE_API_URL + "/down/image/"
 const state = reactive({
   // 遮罩层
   loading: true,
@@ -313,7 +313,7 @@ const onViewProduct = (row: object) => {
 }
 
 const getImage = (row:any) => {
-  return row.photoUrl ? baseURL + '/upload/get/'+ row.photoUrl+"?fileType=DevicePath" : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
+  return row.photoUrl ? downURL+ row.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
 }
 
 /** 删除按钮操作 */

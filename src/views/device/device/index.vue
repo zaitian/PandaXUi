@@ -201,8 +201,8 @@ import {listProductAll} from "@/api/device/product";
 import gatewayImg from '@/assets/gateway.png'
 import gatewayDImg from '@/assets/gateway_d.png'
 import monitorImg from '@/assets/monitor.png'
-const baseURL = import.meta.env.VITE_API_URL
 
+const downURL = import.meta.env.VITE_API_URL + "/down/image/"
 const { proxy } = getCurrentInstance() as any;
 const editModuleRef = ref();
 const viewRef = ref();
@@ -337,7 +337,7 @@ const getTreeselect = async () => {
 };
 
 const getImage = (row:any) => {
-  return row.product.photoUrl ? baseURL + '/upload/get/'+ row.product.photoUrl +'?fileType=DevicePath': row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
+  return row.product.photoUrl ? downURL+ row.product.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg
 }
 
 watch(

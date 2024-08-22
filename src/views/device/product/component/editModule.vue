@@ -22,7 +22,7 @@
                   :on-success="handleUplaodSuccess"
                   :before-upload="beforeUplaodUpload"
               >
-                <img v-if="state.ruleForm.photoUrl" :src="baseURL + '/upload/get/'+ state.ruleForm.photoUrl+'?fileType=DevicePath'" class="uploader-image" fit="contain"/>
+                <img v-if="state.ruleForm.photoUrl" :src="downURL+ state.ruleForm.photoUrl" class="uploader-image" fit="contain"/>
                 <el-icon v-else class="uploader-icon"><Plus /></el-icon>
               </el-upload>
             </el-form-item>
@@ -111,7 +111,8 @@ const props = defineProps({
   },
 })
 
-const baseURL = import.meta.env.VITE_API_URL
+const upURL = import.meta.env.VITE_API_URL +"/up/image"
+const downURL = import.meta.env.VITE_API_URL + "/down/image/"
 const { proxy } = getCurrentInstance() as any;
 const ruleFormRef = ref<HTMLElement | null>(null);
 const state = reactive({

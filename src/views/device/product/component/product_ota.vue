@@ -144,7 +144,10 @@ const props:any = defineProps({
   },
 })
 const ruleFormRef = ref<HTMLElement | null>(null);
-const baseURL = import.meta.env.VITE_API_URL
+
+const upURL = import.meta.env.VITE_API_URL +"/up/ota"
+const downURL = import.meta.env.VITE_API_URL + "/down/ota/"
+
 const state = reactive({
   // 遮罩层
   loading: false,
@@ -161,7 +164,6 @@ const state = reactive({
     pid: ""  //产品Id
   },
   isShowDialog: false,
-  upUrl: baseURL + '/upload/up',
   headers: {'X-TOKEN': `${Session.get('token')}`},
   ruleForm: {
     id: "",
