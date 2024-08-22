@@ -130,11 +130,6 @@ const resetQuery = () => {
 
 
 const onOpenEvent = (row: object) => {
-  // 修改告警状态为 已确认
-  if (row.state === "0"){
-    row.state = "1"
-    updateAlarm(row)
-  }
   state.isShowDialog = true
   state.content = row.content
 }

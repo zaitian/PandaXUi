@@ -15,7 +15,7 @@
             <el-form-item label="产品图片" prop="photoUrl">
               <el-upload
                   class="uploader"
-                  :action="state.upUrl"
+                  :action="upURL"
                   name="file"
                   :headers="state.headers"
                   :show-file-list="false"

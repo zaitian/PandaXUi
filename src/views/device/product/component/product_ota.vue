@@ -23,7 +23,7 @@
         <el-table-column label="固件版本" align="center" prop="version"/>
         <el-table-column label="固件地址" align="center" prop="url">
           <template #default="scope">
-           <a :href="baseURL + '/upload/get/' + scope.row.url" download>{{baseURL + '/upload/get/' + scope.row.url}}</a>
+           <a :href="downURL + scope.row.url" download>{{downURL + scope.row.url}}</a>
           </template>
         </el-table-column>
         <el-table-column label="最新固件" align="center" prop="isLatest">
@@ -97,7 +97,7 @@
         <el-form-item label="固件上传" prop="url">
           <el-upload
               class="uploader"
-              :action="state.upUrl"
+              :action="upURL"
               :accept="'.zip,.tar,.sh,.bin'"
               :headers="state.headers"
               :show-file-list="false"
