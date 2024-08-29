@@ -97,7 +97,7 @@
         <el-form-item label="固件上传" prop="url">
           <el-upload
               class="uploader"
-              :action="state.upUrl"
+              :action="upURL"
               :accept="'.zip,.tar,.sh,.bin'"
               :headers="state.headers"
               :show-file-list="false"

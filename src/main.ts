@@ -19,8 +19,8 @@ import VueAMap, {initAMapApiLoader} from '@vuemap/vue-amap';
 import '@vuemap/vue-amap/dist/style.css'
 
 initAMapApiLoader({
-	key: '86fc3e60687d0a24e4badd8c1b0f4ea0',
-	securityJsCode: '4f809401e3babecd6bc49eb79a17086a', // 新版key需要配合安全密钥使用
+	key: '48a9985ae67324532496855382a2e016',
+	securityJsCode: '4638067b0ea3ef73a8fc2ba0556e06a0', // 新版key需要配合安全密钥使用
 	plugins: [
 		"AMap.Autocomplete",
 		"AMap.PlaceSearch",
