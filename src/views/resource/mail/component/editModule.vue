@@ -1,8 +1,8 @@
 <template>
     <div class="system-menu-container">
-        <el-dialog v-model="state.isShowDialog" width="769px" center>
+        <el-dialog v-model="state.isShowDialog" width="769px" draggable center>
             <template #header>
-                <div style="font-size: large" v-drag="['.system-menu-container .el-dialog', '.system-menu-container .el-dialog__header']">{{title}}</div>
+                <div style="font-size: large" >{{title}}</div>
             </template>
             <el-form
                     :model="state.ruleForm"
@@ -17,7 +17,7 @@
                                 <el-radio
                                         v-for="dict in state.mailOptions"
                                         :key="dict.dictValue"
-                                        :label="dict.dictValue"
+                                        :value="dict.dictValue"
                                 >{{ dict.dictLabel }}
                                 </el-radio>
                             </el-radio-group>
@@ -66,7 +66,7 @@
                                 <el-radio
                                         v-for="dict in state.statusOptions"
                                         :key="dict.dictValue"
-                                        :label="dict.dictValue"
+                                        :value="dict.dictValue"
                                 >{{ dict.dictLabel }}
                                 </el-radio>
                             </el-radio-group>

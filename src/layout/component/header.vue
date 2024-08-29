@@ -23,7 +23,7 @@ export default {
     const setHeaderHeight = computed(() => {
       let { isTagsview, layout } = theme.themeConfig;
       if (isTagsview && layout !== "classic") return "84px";
-      else return "50px";
+      else return "51px";
     });
     // 获取卡片全屏信息
     const isTagsViewCurrenFull = computed(() => {

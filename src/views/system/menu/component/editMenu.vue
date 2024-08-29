@@ -1,14 +1,8 @@
 <template>
   <div class="system-menu-container">
-    <el-dialog v-model="isShowDialog" width="769px" center>
+    <el-dialog v-model="isShowDialog" width="769px" draggable center>
       <template #header>
-        <div
-          style="font-size: large"
-          v-drag="[
-            '.system-menu-container .el-dialog',
-            '.system-menu-container .el-dialog__header',
-          ]"
-        >
+        <div style="font-size: large">
           {{ title }}
         </div>
       </template>
@@ -39,7 +33,7 @@
                 <el-radio
                   v-for="dict in menuTypeOptions"
                   :key="dict.dictValue"
-                  :label="dict.dictValue"
+                  :value="dict.dictValue"
                   >{{ dict.dictLabel }}
                 </el-radio>
               </el-radio-group>
@@ -161,7 +155,7 @@
                 <el-radio
                   v-for="dict in statusOptions"
                   :key="dict.dictValue"
-                  :label="dict.dictValue"
+                  :value="dict.dictValue"
                   >{{ dict.dictLabel }}
                 </el-radio>
               </el-radio-group>
@@ -180,7 +174,7 @@
                 <el-radio
                   v-for="dict in isHideOptions"
                   :key="dict.dictValue"
-                  :label="dict.dictValue"
+                  :value="dict.dictValue"
                   >{{ dict.dictLabel }}
                 </el-radio>
               </el-radio-group>
@@ -199,7 +193,7 @@
                 <el-radio
                   v-for="dict in yesOrNoOptions"
                   :key="dict.dictValue"
-                  :label="dict.dictValue"
+                  :value="dict.dictValue"
                   >{{ dict.dictLabel }}
                 </el-radio>
               </el-radio-group>
@@ -220,7 +214,7 @@
                     <el-radio
                       v-for="dict in yesOrNoOptions"
                       :key="dict.dictValue"
-                      :label="dict.dictValue"
+                      :value="dict.dictValue"
                       >{{ dict.dictLabel }}
                     </el-radio>
                   </el-radio-group>
@@ -251,7 +245,7 @@
                 <el-radio
                   v-for="dict in yesOrNoOptions"
                   :key="dict.dictValue"
-                  :label="dict.dictValue"
+                  :value="dict.dictValue"
                   >{{ dict.dictLabel }}
                 </el-radio>
               </el-radio-group>

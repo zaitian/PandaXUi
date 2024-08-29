@@ -1,8 +1,8 @@
 <template>
   <div class="system-job-container">
-    <el-dialog v-model="state.isShowDialog" width="769px" center>
+    <el-dialog v-model="state.isShowDialog" width="769px" draggable center>
       <template #header>
-        <div style="font-size: large" v-drag="['.system-job-container .el-dialog', '.system-job-container .el-dialog__header']">{{title}}</div>
+        <div style="font-size: large">{{title}}</div>
       </template>
       <el-form
         :model="state.ruleForm"
@@ -65,16 +65,16 @@
 
         <el-form-item label="任务类型" prop="jobType">
           <el-radio-group v-model="state.ruleForm.jobType">
-            <el-radio-button label="1">接口</el-radio-button>
-            <el-radio-button label="2">函数</el-radio-button>
+            <el-radio-button value="1">接口</el-radio-button>
+            <el-radio-button value="2">函数</el-radio-button>
           </el-radio-group>
         </el-form-item>
 
         <el-form-item label="错误策略" prop="misfirePolicy">
           <el-radio-group v-model="state.ruleForm.misfirePolicy">
-            <el-radio-button label="1">立即执行</el-radio-button>
-            <el-radio-button label="2">执行一次</el-radio-button>
-            <el-radio-button label="3">放弃执行</el-radio-button>
+            <el-radio-button value="1">立即执行</el-radio-button>
+            <el-radio-button value="2">执行一次</el-radio-button>
+            <el-radio-button value="3">放弃执行</el-radio-button>
           </el-radio-group>
         </el-form-item>
 
@@ -83,7 +83,7 @@
             <el-radio
               v-for="dict in state.statusOptions"
               :key="dict.dictValue"
-              :label="dict.dictValue"
+              :value="dict.dictValue"
               >{{ dict.dictLabel }}</el-radio
             >
           </el-radio-group>

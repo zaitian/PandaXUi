@@ -134,11 +134,10 @@
 
 <script lang="ts" setup>
 import {nextTick, onMounted, ref} from "vue";
-import { getDeviceStatus,getDevicePropertyHistory} from "@/api/device/device";
+import {downAttribute, getDeviceStatus,getDevicePropertyHistory} from "@/api/device/device";
 import {ElMessage} from "element-plus";
 import {formatDate} from "@/utils/formatTime";
 import * as echarts from "echarts";
-import {addCmd} from "@/api/device/device_cmd";
 
 const props:any = defineProps({
   rowData: {
@@ -181,6 +180,7 @@ const handleQuery = () => {
 const showHistory = (row:any) => {
   isShowHistoryDialog.value = true
   currentProperty.value = row
+  console.log(currentProperty.value.name.toLowerCase())
   historyForm.value.key = row.key
   timeValue.value = [startTime, new Date()]
   nextTick(()=>{

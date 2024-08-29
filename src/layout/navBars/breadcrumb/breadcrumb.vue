@@ -14,7 +14,6 @@
           >
             <SvgIcon
               :name="v.meta.icon"
-              :size="16"
               class="layout-navbars-breadcrumb-iconfont"
               v-if="getThemeConfig.isBreadcrumbIcon"
             />{{ $t(v.meta.title) }}
@@ -22,7 +21,6 @@
           <a v-else @click.prevent="onBreadcrumbClick(v)">
             <SvgIcon
               :name="v.meta.icon"
-              :size="16"
               class="layout-navbars-breadcrumb-iconfont"
               v-if="getThemeConfig.isBreadcrumbIcon"
             />{{ $t(v.meta.title) }}
@@ -72,9 +70,9 @@ export default {
     });
     // 面包屑点击时
     const onBreadcrumbClick = (v: any) => {
-      const { redirect, path } = v;
+      const { redirect, path,children } = v;
       if (redirect) router.push(redirect);
-      else router.push(path);
+      else (children) ? router.push(children[0]) : router.push(path);
     };
     // 展开/收起左侧菜单点击
     const onThemeConfigChange = () => {
@@ -133,16 +131,17 @@ export default {
   padding-left: 15px;
   .layout-navbars-breadcrumb-icon {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 15px;
     margin-right: 15px;
     color: var(--bg-topBarColor);
   }
   .layout-navbars-breadcrumb-span {
+    font-size: 15px;
+    text-align: center;
     opacity: 0.7;
     color: var(--bg-topBarColor);
   }
   .layout-navbars-breadcrumb-iconfont {
-    font-size: 14px;
     margin-right: 5px;
   }
   ::v-deep(.el-breadcrumb__separator) {

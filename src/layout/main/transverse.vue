@@ -2,7 +2,7 @@
 	<el-container class="layout-container flex-center layout-backtop">
 		<Header />
 		<Main />
-		<el-backtop target=".layout-backtop .el-main .el-scrollbar__wrap"></el-backtop>
+		<el-backtop :right="100" :bottom="100" />
 	</el-container>
 </template>
 

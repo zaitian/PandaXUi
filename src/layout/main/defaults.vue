@@ -38,9 +38,7 @@ export default {
     watch(
       () => route.path,
       () => {
-        console.log("ref",proxy.$refs.layoutDefaultsScrollbarRef, layoutDefaultsScrollbarRef.value )
         proxy.$refs.layoutDefaultsScrollbarRef.wrapRef.scrollTop = 0;
-        //proxy.$refs.layoutDefaultsScrollbarRef.setScrollTop(0)
       }
     );
     return {

@@ -1,7 +1,7 @@
 <template>
   <div class="system-device-container">
     <el-dialog v-model="state.isShowDialog" width="769px" center draggable>
-      <template #title>
+      <template #header>
         <div style="font-size: large">{{title}}</div>
       </template>
       <el-form
@@ -47,7 +47,7 @@
             <el-radio
                 v-for="dict in state.statusOptions"
                 :key="dict.dictValue"
-                :label="dict.dictValue"
+                :value="dict.dictValue"
             >{{ dict.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>

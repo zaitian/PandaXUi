@@ -45,7 +45,7 @@
                   <el-radio
                       v-for="dict in state.statusOptions"
                       :key="dict.dictValue"
-                      :label="dict.dictValue"
+                      :value="dict.dictValue"
                   >{{ dict.dictLabel }}</el-radio>
                 </el-radio-group>
               </el-form-item>
@@ -103,6 +103,7 @@ import { updateProduct, addProduct } from "@/api/device/product";
 import { ElMessage } from "element-plus";
 import {Session} from "@/utils/storage";
 import {listProductCategoryLabel} from "@/api/device/product_category";
+import {listChainLabel} from "@/api/rule/rulechain";
 
 const props = defineProps({
   title: {
@@ -165,7 +166,6 @@ const state = reactive({
 // 打开弹窗
 const openDialog = (row: any) => {
   state.ruleForm = JSON.parse(JSON.stringify(row));
-  state.upUrl = baseURL + '/upload/up?fileType=DevicePath'
   state.headers = {'X-TOKEN': `${Session.get('token')}`}
 
   state.isShowDialog = true;
@@ -186,11 +186,11 @@ const getTreeselect = () => {
 };
 
 const getRuleChain = () => {
-  // listChainLabel({}).then((response:any) => {
-  //   if (response.code === 200){
-  //     state.ruleOptions = response.data;
-  //   }
-  // });
+  listChainLabel({}).then((response:any) => {
+    if (response.code === 200){
+      state.ruleOptions = response.data;
+    }
+  });
 };
 
 // 关闭弹窗

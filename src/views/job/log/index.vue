@@ -13,7 +13,7 @@
               placeholder="请输入任务名称模糊查询"
               clearable
               @keyup.enter="handleQuery"
-              style="width: 240px"
+              style="width: 200px"
               v-model="state.queryParams.name"
           />
         </el-form-item>
@@ -21,6 +21,7 @@
           <el-select
               v-model="state.queryParams.status"
               placeholder="请选择任务状态"
+              style="width: 200px"
               clearable
           >
             <el-option

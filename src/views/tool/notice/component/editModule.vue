@@ -1,8 +1,8 @@
 <template>
   <div class="system-notice-container">
-    <el-dialog v-model="state.isShowDialog" width="769px" center>
+    <el-dialog v-model="state.isShowDialog" width="769px" draggable center>
       <template #header>
-        <div style="font-size: large" v-drag="['.system-notice-container .el-dialog', '.system-notice-container .el-dialog__header']">{{title}}</div>
+        <div style="font-size: large">{{title}}</div>
       </template>
       <el-form
         :model="state.ruleForm"

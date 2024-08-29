@@ -16,8 +16,8 @@
 
         <el-form-item label="目标类型" prop="targetInvoke">
           <el-radio-group v-model="state.ruleForm.targetInvoke" @change="getTarget">
-            <el-radio label="cronDevice" border>设备</el-radio>
-            <el-radio label="cronProduct" border>产品</el-radio>
+            <el-radio value="cronDevice" border>设备</el-radio>
+            <el-radio value="cronProduct" border>产品</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="选中目标" prop="targetArgs">
@@ -44,9 +44,9 @@
         </el-form-item>
         <el-form-item label="执行策略" prop="misfirePolicy">
           <el-radio-group v-model="state.ruleForm.misfirePolicy">
-            <el-radio-button label="0">立即执行</el-radio-button>
-            <el-radio-button label="1">执行一次</el-radio-button>
-            <el-radio-button label="2">放弃执行</el-radio-button>
+            <el-radio-button value="0">立即执行</el-radio-button>
+            <el-radio-button value="1">执行一次</el-radio-button>
+            <el-radio-button value="2">放弃执行</el-radio-button>
           </el-radio-group>
         </el-form-item>
 
@@ -55,7 +55,7 @@
             <el-radio
               v-for="dict in state.statusOptions"
               :key="dict.dictValue"
-              :label="dict.dictValue"
+              :value="dict.dictValue"
               >{{ dict.dictLabel }}</el-radio
             >
           </el-radio-group>

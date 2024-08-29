@@ -45,7 +45,7 @@
               />
             </el-form-item>
             <el-form-item label="状态" prop="status">
-              <el-select v-model="state.queryParams.status" placeholder="请选择状态" clearable>
+              <el-select v-model="state.queryParams.status" placeholder="请选择状态" style="width: 200px" clearable>
                 <el-option
                     v-for="dict in state.statusOptions"
                     :key="dict.dictValue"
@@ -55,7 +55,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="所属产品" prop="pid">
-              <el-select v-model="state.queryParams.pid" filterable  placeholder="请选择所属产品" clearable >
+              <el-select v-model="state.queryParams.pid" filterable  placeholder="请选择所属产品" style="width: 200px" clearable >
                 <el-option v-for="product in state.productAllOptions" :key="product.id" :label="product.name" :value="product.id"></el-option>
               </el-select>
             </el-form-item>

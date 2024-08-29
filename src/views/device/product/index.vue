@@ -45,7 +45,7 @@
               />
             </el-form-item>
             <el-form-item label="状态" prop="status">
-              <el-select v-model="state.queryParams.status" placeholder="请选择状态" clearable>
+              <el-select v-model="state.queryParams.status" placeholder="请选择状态" clearable style="width: 200px">
                 <el-option
                     v-for="dict in state.statusOptions"
                     :key="dict.dictValue"

@@ -814,8 +814,8 @@
 // 高亮时/菜单收起时
 .el-menu-item.is-active,
 .el-menu--collapse .el-sub-menu.is-active i {
-	border-radius: 10px !important;
-	color: set-color(primary);
+	border-radius: 15px !important;
+	color: set-color(primary) !important;
 }
 
 .el-active-extend {

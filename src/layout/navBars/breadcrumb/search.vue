@@ -127,6 +127,7 @@ export default defineComponent({
 .layout-search-dialog {
   position: relative;
   :deep(.el-dialog) {
+    padding: 0px;
     .el-dialog__header,
     .el-dialog__body {
       display: none;

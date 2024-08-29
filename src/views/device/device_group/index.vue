@@ -7,7 +7,7 @@
           <el-input
               placeholder="请输入名称模糊查询"
               clearable
-              @keyup.enter.native="handleQuery"
+              @keyup.enter="handleQuery"
               v-model="state.queryParams.name"
           />
         </el-form-item>
@@ -15,6 +15,7 @@
           <el-select
               v-model="state.queryParams.status"
               placeholder="状态"
+              style="width: 200px"
               clearable
           >
             <el-option

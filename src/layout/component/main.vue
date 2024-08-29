@@ -1,6 +1,6 @@
 <template>
   <el-main class="layout-main">
-    <el-button type="primary" color="#626aef" class="drawer-container" @click="showSettingDrawer" ><SvgIcon name="elementSetting" /></el-button>
+    <el-button type="primary" color="#626aef" class="drawer-container" @click="showSettingDrawer" ><SvgIcon name="elementSetting" :size="26" /></el-button>
     <el-scrollbar
       class="layout-scrollbar"
       ref="layoutScrollbarRef"
@@ -95,14 +95,14 @@ export default defineComponent({
     }
     position: fixed;
     right: 10px;
-    top: 20%;
-    height: 40px;
-    width: 40px;
+    top: 80%;
+    height: 45px;
+    width: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 999;
-    border-radius: 4px 0 0 4px;
+    border-radius: 8px 0 0 8px;
     cursor: pointer;
     -webkit-box-shadow: inset 0 0 6px rgba(0 ,0 ,0, 10%);
 }

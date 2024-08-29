@@ -16,14 +16,6 @@
             </el-tab-pane>
           </el-tabs>
         </div>
-        <Scan v-if="state.isScan" />
-        <div class="login-content-main-sacn" @click="state.isScan = !state.isScan">
-          <i
-            class="iconfont"
-            :class="state.isScan ? 'icon-diannao1' : 'icon-barcode-qr'"
-          ></i>
-          <div class="login-content-main-sacn-delta"></div>
-        </div>
       </div>
     </div>
     <div class="login-copyright">
@@ -37,7 +29,6 @@
 import { reactive, computed } from "vue";
 import Account from "@/views/login/component/account.vue";
 import Mobile from "@/views/login/component/mobile.vue";
-import Scan from "@/views/login/component/scan.vue";
 import { useThemeConfigStateStore } from "@/stores/themeConfig";
 const theme = useThemeConfigStateStore();
 const state = reactive({

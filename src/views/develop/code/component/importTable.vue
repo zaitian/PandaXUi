@@ -1,8 +1,8 @@
 <template>
   <div class="system-menu-container">
-    <el-dialog v-model="isShowDialog" width="769px">
+    <el-dialog v-model="isShowDialog" width="769px" draggable>
       <template #header>
-        <div style="font-size: large" v-drag="['.system-menu-container .el-dialog', '.system-menu-container .el-dialog__header']">{{title}}</div>
+        <div style="font-size: large">{{title}}</div>
       </template>
         <el-form
                 :model="queryParams"
@@ -14,7 +14,7 @@
                       v-model="queryParams.tableName"
                       placeholder="请输入表名称"
                       clearable
-                      @keyup.enter.native="handleQuery"
+                      @keyup.enter="handleQuery"
               />
             </el-form-item>
             <el-form-item label="表描述" style="width: 220px" prop="tableComment">
@@ -22,7 +22,7 @@
                       v-model="queryParams.tableComment"
                       placeholder="请输入表描述"
                       clearable
-                      @keyup.enter.native="handleQuery"
+                      @keyup.enter="handleQuery"
               />
             </el-form-item>
             <el-form-item>
@@ -47,11 +47,12 @@
             </template>
           </el-table-column>
         </el-table>
-        <pagination
+        <el-pagination
                 v-show="total>0"
                 :total="total"
-                :page.sync="queryParams.pageIndex"
-                :limit.sync="queryParams.pageSize"
+                :current-page="queryParams.pageIndex"
+                :page-size="queryParams.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
         />

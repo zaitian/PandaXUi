@@ -99,20 +99,20 @@
         </el-form-item>
         <el-form-item label="数据类型" prop="type">
           <el-radio-group v-model="state.ruleForm.type" fill="var(--color-primary)">
-            <el-radio-button label="int64" >整数型</el-radio-button>
-            <el-radio-button label="float64">浮点型</el-radio-button>
-            <el-radio-button label="bool" >布尔型</el-radio-button>
-            <el-radio-button label="string" >字符串</el-radio-button>
-            <el-radio-button label="enum" >枚举整型</el-radio-button>
-            <el-radio-button label="date" >时间</el-radio-button>
-            <el-radio-button label="struct">结构体</el-radio-button>
+            <el-radio-button value="int64" >整数型</el-radio-button>
+            <el-radio-button value="float64">浮点型</el-radio-button>
+            <el-radio-button value="bool" >布尔型</el-radio-button>
+            <el-radio-button value="string" >字符串</el-radio-button>
+            <el-radio-button value="enum" >枚举整型</el-radio-button>
+            <el-radio-button value="date" >时间</el-radio-button>
+            <el-radio-button value="struct">结构体</el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="读写类型" prop="rw">
           <el-radio-group v-model="state.define.rw" fill="var(--color-primary)">
-            <el-radio-button label="r" >只读</el-radio-button>
-            <el-radio-button label="w">只写</el-radio-button>
-            <el-radio-button label="rw" >读写</el-radio-button>
+            <el-radio-button value="r" >只读</el-radio-button>
+            <el-radio-button value="w">只写</el-radio-button>
+            <el-radio-button value="rw" >读写</el-radio-button>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="默认值" prop="default_value">

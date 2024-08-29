@@ -5,7 +5,7 @@
       v-model="getThemeConfig.isDrawer"
       direction="rtl"
       destroy-on-close
-      size="280px"
+      size="350px"
       @close="onDrawerClose"
     >
       <el-scrollbar class="layout-breadcrumb-seting-bar">
@@ -111,7 +111,7 @@
           $t("message.layout.oneTitle")
         }}</el-divider>
         <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">primary</div>
+          <div class="layout-breadcrumb-seting-bar-flex-label">主题色</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
             <el-color-picker
               v-model="getThemeConfig.primary"
@@ -120,52 +120,45 @@
             </el-color-picker>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">success</div>
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
+          <div class="layout-breadcrumb-seting-bar-flex-label">
+            {{ $t("message.layout.fourIsDark") }}
+          </div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.success"
-              @change="onColorPickerChange('success')"
-            >
-            </el-color-picker>
+            <el-switch
+              v-model="getThemeConfig.isIsDark"
+              @change="onAddDarkChange"
+            ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">info</div>
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
+          <div class="layout-breadcrumb-seting-bar-flex-label">
+            {{ $t("message.layout.fourIsGrayscale") }}
+          </div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.info"
-              @change="onColorPickerChange('info')"
-            >
-            </el-color-picker>
+            <el-switch
+              v-model="getThemeConfig.isGrayscale"
+              @change="onAddFilterChange('grayscale')"
+            ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">warning</div>
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
+          <div class="layout-breadcrumb-seting-bar-flex-label">
+            {{ $t("message.layout.fourIsInvert") }}
+          </div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.warning"
-              @change="onColorPickerChange('warning')"
-            >
-            </el-color-picker>
+            <el-switch
+              v-model="getThemeConfig.isInvert"
+              @change="onAddFilterChange('invert')"
+            ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
-          <div class="layout-breadcrumb-seting-bar-flex-label">danger</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-color-picker
-              v-model="getThemeConfig.danger"
-              @change="onColorPickerChange('danger')"
-            >
-            </el-color-picker>
-          </div>
-        </div>
-
+        
         <!-- 菜单 / 顶栏 -->
         <el-divider content-position="left">{{
           $t("message.layout.twoTitle")
         }}</el-divider>
-        <div class="layout-breadcrumb-seting-bar-flex">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoTopBar") }}
           </div>
@@ -177,7 +170,7 @@
             </el-color-picker>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoMenuBar") }}
           </div>
@@ -189,7 +182,7 @@
             </el-color-picker>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoColumnsMenuBar") }}
           </div>
@@ -201,7 +194,7 @@
             </el-color-picker>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoTopBarColor") }}
           </div>
@@ -213,7 +206,7 @@
             </el-color-picker>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoMenuBarColor") }}
           </div>
@@ -225,7 +218,7 @@
             </el-color-picker>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoColumnsMenuBarColor") }}
           </div>
@@ -248,7 +241,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoIsMenuBarColorGradual") }}
           </div>
@@ -259,7 +252,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoIsColumnsMenuBarColorGradual") }}
           </div>
@@ -270,7 +263,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.twoIsMenuBarColorHighlight") }}
           </div>
@@ -297,7 +290,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.threeIsUniqueOpened") }}
           </div>
@@ -308,7 +301,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.threeIsFixedHeader") }}
           </div>
@@ -320,7 +313,7 @@
           </div>
         </div>
         <div
-          class="layout-breadcrumb-seting-bar-flex mt15"
+          class="layout-breadcrumb-seting-bar-flex mt10"
           :style="{ opacity: getThemeConfig.layout !== 'classic' ? 0.5 : 1 }"
         >
           <div class="layout-breadcrumb-seting-bar-flex-label">
@@ -335,7 +328,7 @@
             </el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.threeIsLockScreen") }}
           </div>
@@ -346,7 +339,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt11">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.threeLockScreenTime") }}
           </div>
@@ -367,7 +360,7 @@
         <el-divider content-position="left">{{
           $t("message.layout.fourTitle")
         }}</el-divider>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsShowLogo") }}
           </div>
@@ -379,7 +372,7 @@
           </div>
         </div>
         <div
-          class="layout-breadcrumb-seting-bar-flex mt15"
+          class="layout-breadcrumb-seting-bar-flex mt10"
           :style="{
             opacity:
               getThemeConfig.layout === 'classic' ||
@@ -402,7 +395,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsBreadcrumbIcon") }}
           </div>
@@ -413,7 +406,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsTagsview") }}
           </div>
@@ -424,7 +417,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsTagsviewIcon") }}
           </div>
@@ -435,7 +428,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsCacheTagsView") }}
           </div>
@@ -447,7 +440,7 @@
           </div>
         </div>
         <div
-          class="layout-breadcrumb-seting-bar-flex mt15"
+          class="layout-breadcrumb-seting-bar-flex mt10"
           :style="{ opacity: isMobile ? 0.5 : 1 }"
         >
           <div class="layout-breadcrumb-seting-bar-flex-label">
@@ -461,7 +454,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsShareTagsView") }}
           </div>
@@ -472,7 +465,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsFooter") }}
           </div>
@@ -483,40 +476,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">
-            {{ $t("message.layout.fourIsGrayscale") }}
-          </div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isGrayscale"
-              @change="onAddFilterChange('grayscale')"
-            ></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">
-            {{ $t("message.layout.fourIsInvert") }}
-          </div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isInvert"
-              @change="onAddFilterChange('invert')"
-            ></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">
-            {{ $t("message.layout.fourIsDark") }}
-          </div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch
-              v-model="getThemeConfig.isIsDark"
-              @change="onAddDarkChange"
-            ></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourIsWartermark") }}
           </div>
@@ -527,7 +487,7 @@
             ></el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt14">
+        <div class="layout-breadcrumb-seting-bar-flex mt10">
           <div class="layout-breadcrumb-seting-bar-flex-label">
             {{ $t("message.layout.fourWartermarkText") }}
           </div>

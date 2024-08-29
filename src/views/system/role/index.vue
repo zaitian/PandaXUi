@@ -172,8 +172,7 @@
       </div>
     </el-card>
     <!-- 添加或修改角色配置对话框 -->
-    <el-dialog :title="state.title" v-model="state.open" width="769px" center>
-      <div v-drag="['.app-container .el-dialog', '.app-container .el-dialog__header']"></div>
+    <el-dialog :title="state.title" v-model="state.open" width="769px" draggable center>
       <el-form
           ref="roleFormRef"
           :model="state.roleForm"
@@ -199,7 +198,7 @@
             <el-radio
                 v-for="dict in state.statusOptions"
                 :key="dict.dictValue"
-                :label="dict.dictValue"
+                :value="dict.dictValue"
             >{{ dict.dictLabel }}
             </el-radio>
           </el-radio-group>
@@ -279,8 +278,7 @@
     </el-dialog>
 
     <!-- 分配角色数据权限对话框 -->
-    <el-dialog :title="state.title" v-model="state.openDataScope" width="769px">
-      <div v-drag="['.app-container .el-dialog', '.app-container .el-dialog__header']"></div>
+    <el-dialog :title="state.title" v-model="state.openDataScope" width="769px" draggable>
       <el-form :model="state.roleForm" label-width="80px">
         <el-form-item label="角色名称">
           <el-input v-model="state.roleForm.roleName" :disabled="true"/>
