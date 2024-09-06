@@ -9,7 +9,7 @@
           label-width="68px"
       >
         <el-form-item label="命令状态" prop="state">
-          <el-select v-model="state.queryParams.state" placeholder="请选择状态" clearable>
+          <el-select v-model="state.queryParams.state" placeholder="请选择状态" style="width: 200px" clearable>
             <el-option
                 v-for="dict in stateOption"
                 :key="dict.value"

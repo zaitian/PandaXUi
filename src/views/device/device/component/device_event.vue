@@ -9,7 +9,7 @@
           label-width="68px"
       >
         <el-form-item label="告警类型" prop="state">
-          <el-select v-model="state.queryParams.type" placeholder="告警类型" clearable>
+          <el-select v-model="state.queryParams.type" placeholder="告警类型" style="width: 200px" clearable>
             <el-option label="信息" value="info"/>
             <el-option label="告警" value="alarm"/>
             <el-option label="故障" value="fault"/>
