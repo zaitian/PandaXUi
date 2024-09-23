@@ -145,8 +145,8 @@ const props:any = defineProps({
 })
 const ruleFormRef = ref<HTMLElement | null>(null);
 
-const upURL = import.meta.env.VITE_API_URL +"/up/ota"
-const downURL = import.meta.env.VITE_API_URL + "/down/ota/"
+const upURL = import.meta.env.VITE_API_URL +"/upload/up/ota"
+const downURL = import.meta.env.VITE_API_URL + "/upload/down/ota/"
 
 const state = reactive({
   // 遮罩层

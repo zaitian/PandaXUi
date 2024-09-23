@@ -42,7 +42,7 @@ const props = defineProps({
   },
 })
 
-const downURL = import.meta.env.VITE_API_URL + "/down/image/"
+const downURL = import.meta.env.VITE_API_URL + "/upload/down/image/"
 
 const getImage = (row:any) => {
   return row.photoUrl ? downURL + row.photoUrl : row.deviceType ==='direct' ? monitorImg : row.deviceType ==='gatewayS' ? gatewayDImg : gatewayImg

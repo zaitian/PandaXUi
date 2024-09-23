@@ -202,7 +202,7 @@ import gatewayImg from '@/assets/gateway.png'
 import gatewayDImg from '@/assets/gateway_d.png'
 import monitorImg from '@/assets/monitor.png'
 
-const downURL = import.meta.env.VITE_API_URL + "/down/image/"
+const downURL = import.meta.env.VITE_API_URL + "/upload/down/image/"
 const { proxy } = getCurrentInstance() as any;
 const editModuleRef = ref();
 const viewRef = ref();

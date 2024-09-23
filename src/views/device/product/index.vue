@@ -199,7 +199,7 @@ import monitorImg from '@/assets/monitor.png'
 const { proxy } = getCurrentInstance() as any;
 const editModuleRef = ref();
 const viewRef = ref();
-const downURL = import.meta.env.VITE_API_URL + "/down/image/"
+const downURL = import.meta.env.VITE_API_URL + "/upload/down/image/"
 const state = reactive({
   // 遮罩层
   loading: true,

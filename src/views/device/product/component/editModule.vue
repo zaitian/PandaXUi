@@ -112,8 +112,8 @@ const props = defineProps({
   },
 })
 
-const upURL = import.meta.env.VITE_API_URL +"/up/image"
-const downURL = import.meta.env.VITE_API_URL + "/down/image/"
+const upURL = import.meta.env.VITE_API_URL +"/upload/up/image"
+const downURL = import.meta.env.VITE_API_URL + "/upload/down/image/"
 const { proxy } = getCurrentInstance() as any;
 const ruleFormRef = ref<HTMLElement | null>(null);
 const state = reactive({
