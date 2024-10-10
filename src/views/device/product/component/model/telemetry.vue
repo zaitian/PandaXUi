@@ -22,6 +22,7 @@
       <el-table
           v-loading="state.loading"
           border
+          max-height="550"
           :data="state.tableData"
       >
         <el-table-column label="遥测名称" align="center" prop="name"/>
