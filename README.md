@@ -18,7 +18,9 @@
 ## 🏭在线体验
 
 演示地址：https://iot.pandax.vip  帐号：admin 密码：123456  
-可视乎平台：https://screen.pandax.vip 帐号：admin 密码：123456  
+可视化演示地址：https://screen.pandax.vip  帐号：admin 密码：123456  
+规则引擎演示地址：https://rule.pandax.vip   
+组态演示地址：https://scada.pandax.vip   
 
 ---
 系统在线文档
