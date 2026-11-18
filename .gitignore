@@ -24,3 +24,8 @@ pnpm-debug.log*
 *.sw?
 
 package-lock.json
+# runtime logs
+npm-install.log
+vite-dev.log
+server.log
+server.err

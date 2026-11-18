@@ -165,72 +165,123 @@
       </div>
     </el-card>
     <!-- 操作日志详细 -->
-    <el-dialog title="操作日志详细" v-model="state.open" width="700px" center append-to-body>
-      <el-form
-          ref="ruleFormRef"
-          :model="state.modelForm"
-          label-width="100px"
-      >
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="操作模块："
-            >{{ state.modelForm.title }} / {{ typeFormat(state.modelForm) }}
-            </el-form-item
-            >
-            <el-form-item label="登录信息："
-            >{{ state.modelForm.operName }} / {{ state.modelForm.operIp }} /
-              {{ state.modelForm.operLocation }}
-            </el-form-item
-            >
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="请求地址：">{{
-                state.modelForm.operUrl
-              }}
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="操作方法：">{{
-                state.modelForm.method
-              }}
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="请求参数：">{{
-                state.modelForm.operParam
-              }}
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="操作状态：">
-              {{ statusFormat(state.modelForm) }}
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="操作时间：">{{
-                dateStrFormat(state.modelForm.createTime)
-              }}
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="异常信息：" v-if="state.modelForm.status === '1'">{{
-                state.modelForm.errorMsg
-              }}
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
+    <el-dialog
+        title="操作日志详细"
+        v-model="state.open"
+        width="920px"
+        class="oper-detail-dialog"
+        center
+        append-to-body
+    >
+      <el-descriptions class="oper-desc" :column="2" border>
+        <el-descriptions-item label="操作模块">
+          {{ state.modelForm.title }} / {{ typeFormat(state.modelForm) }}
+        </el-descriptions-item>
+        <el-descriptions-item label="操作时间">
+          {{ dateStrFormat(state.modelForm.createTime) }}
+        </el-descriptions-item>
+        <el-descriptions-item label="操作人员">
+          {{ state.modelForm.operName }}
+        </el-descriptions-item>
+        <el-descriptions-item label="操作状态">
+          <el-tag
+              size="small"
+              effect="light"
+              disable-transitions
+              :type="state.modelForm.status === '1' ? 'danger' : 'success'"
+          >{{ statusFormat(state.modelForm) }}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item label="请求地址" :span="2">
+          <span class="oper-method">{{ state.modelForm.method }}</span>
+          <span class="oper-url">{{ state.modelForm.operUrl }}</span>
+        </el-descriptions-item>
+        <el-descriptions-item label="来源主机">
+          {{ state.modelForm.operIp }} / {{ state.modelForm.operLocation }}
+        </el-descriptions-item>
+        <el-descriptions-item label="Trace Id">
+          {{ state.modelForm.traceId || '-' }}
+        </el-descriptions-item>
+        <el-descriptions-item v-if="state.modelForm.status === '1'" label="异常信息" :span="2">
+          <span class="oper-error">{{ state.modelForm.errorMsg }}</span>
+        </el-descriptions-item>
+      </el-descriptions>
+
+      <div class="flow-panel" v-if="flowSteps.length || state.modelForm.flow">
+        <div class="flow-panel__head">
+          <div class="flow-panel__title">
+            <span class="flow-panel__mark"></span>
+            执行链路
+            <el-tag
+                v-if="flowSteps.length"
+                size="small"
+                effect="dark"
+                disable-transitions
+                :type="flowSummary.fail ? 'danger' : 'success'"
+            >{{ flowSummary.fail ? 'FAILED' : 'SUCCESS' }}</el-tag>
+          </div>
+          <div class="flow-panel__metrics" v-if="flowSteps.length">
+            <span><em>{{ flowSummary.total }}</em> 步</span>
+            <span class="is-ok"><em>{{ flowSummary.ok }}</em> 成功</span>
+            <span class="is-fail" v-if="flowSummary.fail"><em>{{ flowSummary.fail }}</em> 失败</span>
+            <span class="is-skip" v-if="flowSummary.skip"><em>{{ flowSummary.skip }}</em> 跳过</span>
+            <span><em>{{ flowSummary.cost }}</em> ms</span>
+          </div>
+          <span class="flow-panel__hint" v-else>历史日志，仅保留文本记录</span>
+        </div>
+
+        <div class="flow-steps" v-if="flowSteps.length">
+          <div
+              class="flow-step"
+              v-for="(step, index) in flowSteps"
+              :key="index"
+              :class="'is-' + String(step.status).toLowerCase()"
+          >
+            <div class="flow-step__rail">
+              <span class="flow-step__dot">{{ index + 1 }}</span>
+              <span class="flow-step__line" v-if="index < flowSteps.length - 1"></span>
+            </div>
+            <div class="flow-step__body">
+              <div class="flow-step__title">
+                <span class="flow-step__name">{{ step.name }}</span>
+                <el-tag
+                    size="small"
+                    effect="light"
+                    disable-transitions
+                    :type="statusType(step.status)"
+                >{{ statusText(step.status) }}</el-tag>
+                <span class="flow-step__cost" v-if="step.costMs">{{ step.costMs }} ms</span>
+              </div>
+              <div class="flow-step__fields" v-if="step.fields && step.fields.length">
+                <div class="flow-field" v-for="field in step.fields" :key="field.label">
+                  <span class="flow-field__label">{{ field.label }}</span>
+                  <span class="flow-field__value">{{ field.value }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <el-collapse class="flow-raw" v-if="state.modelForm.flow">
+          <el-collapse-item title="ASCII 流程图（可复制到终端）" name="raw">
+            <div class="flow-raw__actions">
+              <el-button size="small" text type="primary" @click="copyFlow">复制</el-button>
+            </div>
+            <pre class="flow-chart">{{ state.modelForm.flow }}</pre>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+
       <template #footer>
-                <span class="dialog-footer">
-                  <el-button @click="state.open = false">关 闭</el-button>
-                </span>
+        <span class="dialog-footer">
+          <el-button @click="state.open = false">关 闭</el-button>
+        </span>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts" setup name="Operlog">
-import {reactive, onMounted, toRefs, ref, getCurrentInstance} from "vue";
+import {reactive, onMounted, getCurrentInstance, computed} from "vue";
 import {
   listOperInfo,
   delOperInfo,
@@ -239,7 +290,44 @@ import {
 import {ElMessageBox, ElMessage} from "element-plus";
 
 const {proxy} = getCurrentInstance() as any;
-const ruleFormRef = ref<HTMLElement | null>(null);
+// 结构化链路步骤，用于渲染流程图
+const flowSteps = computed<any[]>(() => {
+  const raw = state.modelForm.flowData;
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    return [];
+  }
+});
+const flowSummary = computed(() => {
+  const steps = flowSteps.value;
+  return {
+    total: steps.length,
+    ok: steps.filter((s) => s.status === 'OK').length,
+    fail: steps.filter((s) => s.status === 'FAIL').length,
+    skip: steps.filter((s) => s.status === 'SKIP').length,
+    cost: steps.reduce((sum, s) => sum + (s.costMs || 0), 0),
+  };
+});
+const statusType = (status: string) => {
+  if (status === 'OK') return 'success';
+  if (status === 'FAIL') return 'danger';
+  return 'info';
+};
+const statusText = (status: string) => {
+  if (status === 'OK') return '成功';
+  if (status === 'FAIL') return '失败';
+  return '跳过';
+};
+const copyFlow = async () => {
+  try {
+    await navigator.clipboard.writeText(state.modelForm.flow || '');
+    ElMessage.success('已复制到剪贴板');
+  } catch (e) {
+    ElMessage.warning('复制失败，请手动选择文本');
+  }
+};
 const state = reactive({
   // 遮罩层
   loading: true,
@@ -384,4 +472,209 @@ onMounted(() => {
 </script>
 
 <style>
+.oper-detail-dialog {
+  max-width: 94vw;
+}
+.oper-detail-dialog :deep(.el-dialog__body) {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 12px 20px 4px;
+}
+.oper-detail-dialog :deep(.el-descriptions__body) {
+  background: #fff;
+}
+.oper-desc :deep(.el-descriptions__label) {
+  width: 92px;
+  color: #606266;
+}
+.oper-method {
+  display: inline-block;
+  min-width: 56px;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #409eff;
+}
+.oper-url {
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  word-break: break-all;
+}
+.oper-error {
+  color: #f56c6c;
+}
+
+/* 执行链路面板 */
+.flow-panel {
+  margin-top: 18px;
+  border: 1px solid #ebeef5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.flow-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #fafbfc;
+  border-bottom: 1px solid #ebeef5;
+}
+.flow-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+.flow-panel__mark {
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: #409eff;
+}
+.flow-panel__metrics {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  color: #909399;
+}
+.flow-panel__metrics em {
+  font-style: normal;
+  font-weight: 600;
+  color: #303133;
+}
+.flow-panel__metrics .is-ok em {
+  color: #67c23a;
+}
+.flow-panel__metrics .is-fail em {
+  color: #f56c6c;
+}
+.flow-panel__metrics .is-skip em {
+  color: #909399;
+}
+.flow-panel__hint {
+  font-size: 12px;
+  color: #c0c4cc;
+}
+
+/* 步骤时间轴 */
+.flow-steps {
+  padding: 14px 18px 4px;
+}
+.flow-step {
+  display: flex;
+  gap: 12px;
+}
+.flow-step__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 22px;
+  flex: 0 0 22px;
+}
+.flow-step__dot {
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: #67c23a;
+}
+.flow-step.is-fail .flow-step__dot {
+  background: #f56c6c;
+}
+.flow-step.is-skip .flow-step__dot {
+  background: #c0c4cc;
+}
+.flow-step__line {
+  flex: 1;
+  width: 2px;
+  min-height: 16px;
+  margin: 4px 0;
+  background: #dcdfe6;
+}
+.flow-step__body {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 16px;
+}
+.flow-step__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+}
+.flow-step__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+.flow-step__cost {
+  font-size: 12px;
+  color: #909399;
+}
+.flow-step__fields {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #f7f8fa;
+  border-radius: 4px;
+}
+.flow-field {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.flow-field + .flow-field {
+  margin-top: 2px;
+}
+.flow-field__label {
+  flex: 0 0 60px;
+  color: #909399;
+}
+.flow-field__value {
+  flex: 1;
+  min-width: 0;
+  color: #303133;
+  font-family: Consolas, "Courier New", monospace;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+/* ASCII 原文 */
+.flow-raw {
+  border-top: 1px solid #ebeef5;
+}
+.flow-raw :deep(.el-collapse-item__header) {
+  padding-left: 16px;
+  font-size: 13px;
+  color: #606266;
+}
+.flow-raw :deep(.el-collapse-item__content) {
+  padding: 0 16px 14px;
+}
+.flow-raw__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+.flow-chart {
+  margin: 0;
+  padding: 10px 12px;
+  width: 100%;
+  max-height: 360px;
+  overflow: auto;
+  font-family: "Sarasa Mono SC", "Microsoft YaHei Mono", NSimSun, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 4px;
+}
 </style>
