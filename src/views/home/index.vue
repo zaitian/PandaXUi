@@ -149,7 +149,7 @@ const getPanelData = () => {
   })
   getAlarmPanel().then((res:any)=>{
     if (res.code === 200){
-      state.deviceAlarmPanel = res.data
+      state.deviceAlarmPanel = res.data || []
       initDeviceAlarmCount()
     }
   })
@@ -214,7 +214,8 @@ const initDeviceCount = () => {
 
   let data = []
   let statusName = '未知'
-  state.devicePanel.deviceLinkStatusInfo.forEach((item,index)=>{
+  const linkStatusList = state.devicePanel.deviceLinkStatusInfo || []
+  linkStatusList.forEach((item,index)=>{
     if (item.linkStatus === 'online'){
       statusName = "在线设备"
       state.onLineCount = item.deviceTotal || 0
